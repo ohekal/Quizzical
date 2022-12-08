@@ -21,6 +21,7 @@ function App() {
         key={nanoid()}
         question={quiz.question}
         answers={[...quiz.incorrect_answers, quiz.correct_answer].sort()}
+        correctAnswer={quiz.correct_answer}
         Quizzical={Quizzical}
         checkAnswers={checkAnswers}
         count={count}
