@@ -30,13 +30,12 @@ export default function Quiz(props) {
   }
 
   React.useEffect(() => {
-    quizAnswers.forEach((element) => {
-      if (element.isHeld && element.value === props.correctAnswer) {
-        // props.setCount((prev) => prev + 1);
-        console.log("ok");
-      }
-    });
-    console.log("ok");
+    quizAnswers.map((ans) =>
+      props.setCount((count) =>
+        ans.isHeld && ans.value === props.correcrAnswer ? count + 1 : ""
+      )
+    );
+    console.log(props.count);
     // eslint-disable-next-line
   }, [props.checked]);
 
