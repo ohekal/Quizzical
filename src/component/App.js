@@ -1,12 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../App.css";
 import Start from "./Start";
 import Quiz from "./Quiz";
-import Data from "./Data";
 import { nanoid } from "nanoid";
 
 function App() {
-  const [Quizzical, setQuizzical] = React.useState(Data.results);
+  const [Quizzical, setQuizzical] = React.useState([]);
   const [startQuiz, setStartQuiz] = React.useState(false);
   const [checked, setCheck] = React.useState(false);
   const [count, setCount] = React.useState(0);
@@ -15,6 +14,16 @@ function App() {
     setStartQuiz(true);
   }
 
+  React.useEffect(() => {
+    async function getData() {
+      const res = await fetch("https://opentdb.com/api.php?amount=5");
+      const data = await res.json();
+      setQuizzical(data.results);
+    }
+    getData();
+  }, []);
+
+  console.log("app");
   const quizzicalElement = Quizzical.map((quiz) => {
     return (
       <Quiz
@@ -42,10 +51,10 @@ function App() {
       {startQuiz ? (
         <section>
           {quizzicalElement}
+          {checked && <p>You scored {count} /5 correct answers</p>}
           <button onClick={checkAnswers}>
             {!checked ? " Check answers" : "playagain"}
           </button>
-          {checked && <p>You scored {count} /5 correct answers</p>}
         </section>
       ) : (
         <Start handleClick={getQuiz} />

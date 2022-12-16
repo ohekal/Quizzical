@@ -11,38 +11,37 @@ export default function Quiz(props) {
         value: ans,
         id: nanoid(),
         isHeld: false,
+        isTrue: false,
       };
     });
     return allAnswers;
   }
+  console.log(quizAnswers);
 
   function holdAnswer(id) {
-    setQuizAnswers((prev) =>
-      prev.map((ans) => {
-        return ans.id === id
-          ? {
-              ...ans,
-              isHeld: !ans.isHeld,
-            }
-          : { ...ans, isHeld: false };
-      })
-    );
+    if (!props.checked) {
+      setQuizAnswers((prev) =>
+        prev.map((ans) => {
+          const heldAnswer = ans.id === id;
+          const trueAnswer = ans.value === props.correctAnswer;
+          return heldAnswer && trueAnswer
+            ? { ...ans, isHeld: true, isTrue: true }
+            : heldAnswer && !trueAnswer
+            ? { ...ans, isHeld: true, isTrue: false }
+            : { ...ans, isHeld: false, isTrue: false };
+        })
+      );
+    }
   }
-
-  React.useEffect(() => {
-    quizAnswers.map((ans) =>
-      props.setCount((count) =>
-        ans.isHeld && ans.value === props.correcrAnswer ? count + 1 : ""
-      )
-    );
-    console.log(props.count);
-    // eslint-disable-next-line
-  }, [props.checked]);
 
   return (
     <div className="quiz" id={props.id}>
       <h2>{props.question}</h2>
-      <Answer quizAnswers={quizAnswers} handleClick={holdAnswer} />
+      <Answer
+        quizAnswers={quizAnswers}
+        handleClick={holdAnswer}
+        checked={props.checked}
+      />
     </div>
   );
 }

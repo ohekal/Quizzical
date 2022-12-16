@@ -4,6 +4,7 @@
   align-items: center;
 }
 .App {
+  padding: 0px 50px;
   @include centring();
   align-items: initial;
   height: 100vh;

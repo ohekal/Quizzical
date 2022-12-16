@@ -1,5 +1,5 @@
 {
-  "homepage": "https://ohekal.github.io/Quizzical" ,
+  "homepage": "https://ohekal.github.io/Quizzical",
   "name": "app",
   "version": "0.1.0",
   "private": true,
@@ -7,7 +7,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "eslint-plugin-react-hooks": "^5.0.0-next-a0619e26c-20221207",
+    "eslint-plugin-react-hooks": "^5.0.0-next-4dda96a40-20221213",
     "nanoid": "^4.0.0",
     "react": "^18.2.0",
     "react-confetti": "^6.1.0",
